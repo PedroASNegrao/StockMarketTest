@@ -53,7 +53,7 @@ else:
     # ====================== Loading Data from Kaggle ==================================
     # You will be using HP's data. Feel free to experiment with other data.
     # But while doing so, be careful to have a large enough dataset and also pay attention to the data normalization
-    df = pd.read_csv(os.path.join('Stocks','hpq.us.txt'),delimiter=',',usecols=['Date','Open','High','Low','Close'])
+    df = pd.read_csv(os.path.join('Projects/Stocks', 'hpq.us.txt'), delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
     print('Loaded data from the Kaggle repository')
 
 # ====================== Splitting Data into a Training set and a Test set ==================================
