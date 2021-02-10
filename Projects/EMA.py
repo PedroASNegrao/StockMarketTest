@@ -101,6 +101,9 @@ for ti in range(11000):
 # Used for visualization and test purposes
 all_mid_data = np.concatenate([train_data,test_data],axis=0)
 
+# EMA Method is eficient to predict the value on short period os time, for example to guess to value that will be on the next day
+
+
 window_size = 100
 N = train_data.size
 
