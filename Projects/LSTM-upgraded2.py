@@ -31,6 +31,7 @@ import os
 import numpy as np
 import tensorflow as tf
 import tensorflow as tf2
+from tensorflow.python.ops import rnn, rnn_cell
 from tensorflow.python.framework import ops
 from sklearn.preprocessing import MinMaxScaler
 
@@ -205,7 +206,7 @@ lstm_cells = [
                            )
  for li in range(n_layers)]
 
-drop_lstm_cells = [tf.compat.v1.nn.rnn.DropoutWrapper(
+drop_lstm_cells = [tf.compat.v1.nn.rnn_cell.DropoutWrapper(
     lstm, input_keep_prob=1.0,output_keep_prob=1.0-dropout, state_keep_prob=1.0-dropout
 ) for lstm in lstm_cells]
 drop_multi_cell = tf.compat.v1.nn.rnn_cell.MultiRNNCell(drop_lstm_cells)
@@ -222,7 +223,7 @@ initial_state = []
 for li in range(n_layers):
   c.append(tf.Variable(tf.zeros([batch_size, num_nodes[li]]), trainable=False))
   h.append(tf.Variable(tf.zeros([batch_size, num_nodes[li]]), trainable=False))
-  initial_state.append(tf.nn.rnn_cell.LSTMStateTuple(c[li], h[li]))
+  initial_state.append(tf.compat.v1.nn.rnn_cell.LSTMStateTuple(c[li], h[li]))
 
 # Do several tensor transofmations, because the function dynamic_rnn requires the output to be of
 # a specific format. Read more at: https://www.tensorflow.org/api_docs/python/tf/nn/dynamic_rnn

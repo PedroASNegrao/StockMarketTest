@@ -1,43 +1,17 @@
 TensorFlow 2.0 Upgrade Script
 -----------------------------
 Converted 1 files
-Detected 4 issues that require attention
+Detected 0 issues that require attention
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-File: Projects/LSTM.py
---------------------------------------------------------------------------------
-Projects/LSTM.py:208:19: WARNING: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib.rnn. (Manual edit required) tf.contrib.rnn.* has been deprecated, and widely used cells/functions will be moved to tensorflow/addons repository. Please check it there and file Github issues if necessary.
-Projects/LSTM.py:208:19: ERROR: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib. tf.contrib.rnn.DropoutWrapper cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
-Projects/LSTM.py:214:4: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-Projects/LSTM.py:215:4: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
 ================================================================================
 Detailed log follows:
 
 ================================================================================
 --------------------------------------------------------------------------------
-Processing file 'Projects/LSTM.py'
- outputting to 'Projects/LSTM-upgraded.py'
+Processing file 'Projects/LSTM-upgraded.py'
+ outputting to 'Projects/LSTM-upgraded2.py'
 --------------------------------------------------------------------------------
 
-37:0: INFO: Renamed 'tf.disable_v2_behavior' to 'tf.compat.v1.disable_v2_behavior'
-196:24: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
-197:25: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
-202:4: INFO: Renamed 'tf.contrib.rnn.LSTMCell' to 'tf.compat.v1.nn.rnn_cell.LSTMCell'
-204:41: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
-
-208:19: WARNING: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib.rnn. (Manual edit required) tf.contrib.rnn.* has been deprecated, and widely used cells/functions will be moved to tensorflow/addons repository. Please check it there and file Github issues if necessary.
-208:19: ERROR: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib. tf.contrib.rnn.DropoutWrapper cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
-211:18: INFO: Renamed 'tf.contrib.rnn.MultiRNNCell' to 'tf.compat.v1.nn.rnn_cell.MultiRNNCell'
-212:13: INFO: Renamed 'tf.contrib.rnn.MultiRNNCell' to 'tf.compat.v1.nn.rnn_cell.MultiRNNCell'
-214:4: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-214:4: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
-214:62: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
-
-215:4: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
-215:4: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
-215:36: INFO: Renamed 'tf.random_uniform' to 'tf.random.uniform'
-225:23: INFO: Renamed 'tf.contrib.rnn.LSTMStateTuple' to 'tf.nn.rnn_cell.LSTMStateTuple'
-232:26: INFO: Renamed 'tf.nn.dynamic_rnn' to 'tf.compat.v1.nn.dynamic_rnn'
-238:14: INFO: Renamed 'tf.nn.xw_plus_b' to 'tf.compat.v1.nn.xw_plus_b'
+225:23: INFO: Renamed 'tf.nn.rnn_cell.LSTMStateTuple' to 'tf.compat.v1.nn.rnn_cell.LSTMStateTuple'
 --------------------------------------------------------------------------------
 
