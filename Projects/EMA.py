@@ -1,3 +1,7 @@
+
+# The Exponential Moving Average (EMA) method is eficient to predict the value
+# on short period os time, for example to guess to value that will be on the next day
+
 # Make sure that you have all these libaries available to run the code successfully
 from pandas_datareader import data
 import matplotlib.pyplot as plt
@@ -101,8 +105,10 @@ for ti in range(11000):
 # Used for visualization and test purposes
 all_mid_data = np.concatenate([train_data,test_data],axis=0)
 
-# EMA Method is eficient to predict the value on short period os time, for example to guess to value that will be on the next day
+# The Exponential Moving Average (EMA) method is eficient to predict the value
+# on short period os time, for example to guess to value that will be on the next day
 
+# ====================== Exponential Moving Average (EMA) ==================================
 
 window_size = 100
 N = train_data.size
