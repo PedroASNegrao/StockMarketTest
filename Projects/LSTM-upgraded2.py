@@ -197,7 +197,7 @@ for ui in range(num_unrollings):
     train_inputs.append(tf.compat.v1.placeholder(tf.float32, shape=[batch_size,D],name='train_inputs_%d'%ui))
     train_outputs.append(tf.compat.v1.placeholder(tf.float32, shape=[batch_size,1], name = 'train_outputs_%d'%ui))
 
-#iImplementation of the LSTM(w) cells and the Lienar regression(b)
+# iImplementation of the LSTM(w) cells and the Lienar regression(b)
 
 lstm_cells = [
     tf.compat.v1.nn.rnn_cell.LSTMCell(num_units=num_nodes[li],
@@ -214,9 +214,10 @@ multi_cell = tf.compat.v1.nn.rnn_cell.MultiRNNCell(lstm_cells)
 
 w = tf.compat.v1.get_variable('w',shape=[num_nodes[-1], 1], initializer=tf.compat.v1.keras.initializers.VarianceScaling(scale=1.0, mode="fan_avg", distribution="uniform"))
 b = tf.compat.v1.get_variable('b',initializer=tf.random.uniform([1],-0.1,0.1))
+#
+# ---------------------------------------------------------------------------------------
 
-#Calculating LSTM output and Feeding it to the regression layer to get final prediction
-
+# Calculating LSTM output and Feeding it to the regression layer to get final prediction
 # Create cell state and hidden state variables to maintain the state of the LSTM
 c, h = [],[]
 initial_state = []
@@ -225,21 +226,18 @@ for li in range(n_layers):
   h.append(tf.Variable(tf.zeros([batch_size, num_nodes[li]]), trainable=False))
   initial_state.append(tf.compat.v1.nn.rnn_cell.LSTMStateTuple(c[li], h[li]))
 
-# Do several tensor transofmations, because the function dynamic_rnn requires the output to be of
-# a specific format. Read more at: https://www.tensorflow.org/api_docs/python/tf/nn/dynamic_rnn
 all_inputs = tf.concat([tf.expand_dims(t,0) for t in train_inputs],axis=0)
 
 # all_outputs is [seq_length, batch_size, num_nodes]
-all_lstm_outputs, state = tf.compat.v1.nn.dynamic_rnn(
+all_lstm_outputs, state = tf.keras.layers.RNN(
     drop_multi_cell, all_inputs, initial_state=tuple(initial_state),
     time_major = True, dtype=tf.float32)
 
 all_lstm_outputs = tf.reshape(all_lstm_outputs, [batch_size*num_unrollings,num_nodes[-1]])
 
-all_outputs = tf.compat.v1.nn.xw_plus_b(all_lstm_outputs,w,b)
+all_outputs = tf.nn.xw_plus_b(all_lstm_outputs,w,b)
 
 split_outputs = tf.split(all_outputs,num_unrollings,axis=0)
-
 
 
 for ui,(dat,lbl) in enumerate(zip(u_data,u_labels)):
